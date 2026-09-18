@@ -1,14 +1,18 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
-if (!uri) throw new Error("MONGODB_URI is not configured");
-
 const globalForMongo = globalThis as unknown as { mongoPromise?: Promise<MongoClient> };
-export const clientPromise = globalForMongo.mongoPromise ?? new MongoClient(uri, { maxPoolSize: 8 }).connect();
-if (process.env.NODE_ENV !== "production") globalForMongo.mongoPromise = clientPromise;
+
+function getClientPromise() {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) throw new Error("MONGODB_URI is not configured");
+  if (!globalForMongo.mongoPromise) {
+    globalForMongo.mongoPromise = new MongoClient(uri, { maxPoolSize: 8 }).connect();
+  }
+  return globalForMongo.mongoPromise;
+}
 
 export async function promptsCollection() {
-  const client = await clientPromise;
+  const client = await getClientPromise();
   const col = client.db("promptmatch").collection("prompts");
   await Promise.all([
     col.createIndex({ collectorKey: 1, createdAt: -1 }),

@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "PromptMatch Collector",
+  "version": "0.1.0",
+  "description": "Privately save prompts you submit to ChatGPT, Gemini and Claude so you can compare them with your web pages.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://gemini.google.com/*",
+    "https://claude.ai/*",
+    "__API_BASE__/*"
+  ],
+  "content_scripts": [{
+    "matches": ["https://chatgpt.com/*","https://gemini.google.com/*","https://claude.ai/*"],
+    "js": ["content.js"],
+    "run_at": "document_start"
+  }],
+  "action": {"default_popup": "popup.html"}
+}

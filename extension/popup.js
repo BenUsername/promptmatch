@@ -1,4 +1,4 @@
-const API="__API_BASE__";
+const API="https://promptmatch-app.vercel.app";
 function newKey(){const a=new Uint8Array(24);crypto.getRandomValues(a);return [...a].map(x=>x.toString(16).padStart(2,"0")).join("")}
 (async()=>{
   let s=await chrome.storage.local.get(["enabled","collectorKey"]);if(!s.collectorKey){s.collectorKey=newKey();await chrome.storage.local.set({collectorKey:s.collectorKey,enabled:false})}

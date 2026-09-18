@@ -8,7 +8,7 @@
     "https://chatgpt.com/*",
     "https://gemini.google.com/*",
     "https://claude.ai/*",
-    "__API_BASE__/*"
+    "https://promptmatch-app.vercel.app/*"
   ],
   "content_scripts": [{
     "matches": ["https://chatgpt.com/*","https://gemini.google.com/*","https://claude.ai/*"],

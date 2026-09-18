@@ -1,4 +1,4 @@
-const API="__API_BASE__";
+const API="https://promptmatch-app.vercel.app";
 const provider=location.hostname.includes("chatgpt")?"chatgpt":location.hostname.includes("gemini")?"gemini":"claude";
 let lastSent="", lastAt=0;
 
